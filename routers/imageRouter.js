@@ -2,11 +2,19 @@ const { Router } = require("express");
 const router = new Router();
 const Image = require("../models").image;
 
-router.get("/", async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
-    res.send(await Image.findAll());
+    const { title, url } = req.body;
+    if (!title || !url) {
+      res.status(400).send("missing parameters");
+    } else {
+      const newImage = await Image.create({
+        title,
+        url,
+      });
+      res.send(newImage);
+    }
   } catch (e) {
-    console.log(e);
     next(e);
   }
 });
