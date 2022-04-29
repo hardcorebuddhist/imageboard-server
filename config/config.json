@@ -1,0 +1,6 @@
+{
+  "development": {
+    "url": "postgres://swdbklbi:j1fadjBP1H5LvkrPNCUa7jVcnD5KrZz-@tai.db.elephantsql.com:5432/swdbklbi",
+    "dialect": "postgres"
+  }
+}
