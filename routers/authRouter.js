@@ -1,5 +1,5 @@
 const { Router } = require("express");
-// const { toJWT, toData } = require("../auth/jwt");
+const { toJWT, toData } = require("../auth/jwt");
 const User = require("../models").user;
 const bcrypt = require("bcrypt");
 
@@ -17,6 +17,19 @@ router.post("/signup", async (req, res, next) => {
         fullName,
       });
       res.send(newUser);
+    }
+  } catch (e) {
+    next(e);
+  }
+});
+
+router.post("/login", async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password) {
+      res.status(400).send("Please supply a valid email and password");
+    } else {
+      res.send({ jwt: toJWT({ userId: 1 }) });
     }
   } catch (e) {
     next(e);
